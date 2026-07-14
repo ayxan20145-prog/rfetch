@@ -1,4 +1,4 @@
-use std::env;
+use std::{env, fs};
 use sysinfo::System;
 
 fn main() {
@@ -7,10 +7,17 @@ fn main() {
 
     let info = os_info::get();
 
-    let ascii = if info.os_type().to_string() == "CachyOS Linux" {
-        include_str!("ascii/cachyos.txt")
-    } else {
-        include_str!("ascii/default.txt")
+    let os_release = fs::read_to_string("/etc/os-release").unwrap();
+
+    let distro = os_release
+        .lines()
+        .find(|line| line.starts_with("ID="))
+        .unwrap_or("")
+        .trim_start_matches("ID=");
+
+    let ascii = match distro {
+        "cachyos" => include_str!("ascii/cachyos.txt"),
+        _ => include_str!("ascii/default.txt"),
     };
 
     println!("{}", ascii);
