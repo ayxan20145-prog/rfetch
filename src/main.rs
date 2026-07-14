@@ -1,3 +1,4 @@
+use std::env;
 use sysinfo::System;
 
 fn main() {
@@ -24,4 +25,8 @@ fn main() {
     println!("Host: {}", host);
     println!("CPU: {}", cpu);
     println!("Cores: {}", cores);
+    match env::var("SHELL") {
+        Ok(shell) => println!("Shell: {}", shell),
+        Err(_) => println!("SHELL not set"),
+    }
 }
