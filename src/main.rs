@@ -7,6 +7,14 @@ fn main() {
 
     let info = os_info::get();
 
+    let ascii = if info.os_type().to_string() == "CachyOS Linux" {
+        include_str!("ascii/cachyos.txt")
+    } else {
+        include_str!("ascii/default.txt")
+    };
+
+    println!("{}", ascii);
+
     println!("OS: {}", info.os_type());
     match System::kernel_version() {
         Some(version) => println!("Kernel: {}", version),
