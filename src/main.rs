@@ -17,6 +17,11 @@ fn main() {
 
     let ascii = match distro {
         "cachyos" => include_str!("ascii/cachyos.txt"),
+        "arch" => include_str!("ascii/arch.txt"),
+        "debian" => include_str!("ascii/debian.txt"),
+        "fedora" => include_str!("ascii/fedora.txt"),
+        "ubuntu" => include_str!("ascii/ubuntu.txt"),
+        "nixos" => include_str!("ascii/nixos.txt"),
         _ => include_str!("ascii/default.txt"),
     };
 
